@@ -4,7 +4,7 @@ import API_PATHS from "../constants/apiPaths";
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8000/",
+    baseUrl: process.env.REACT_APP_NODE_BASE_URL,
   }),
   endpoints: (builder) => ({
     getFusionEmployees: builder.query({
