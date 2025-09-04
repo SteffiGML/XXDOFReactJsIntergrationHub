@@ -49,6 +49,20 @@ export const apiSlice = createApi({
         body: date,
       }),
     }),
+        syncFusionDBOXGrades: builder.mutation({
+      query: (minDate) => ({
+        url: API_PATHS.SYNC_FUSION_DBOX_GRADES,
+        method: "POST",
+        body: minDate,
+      }),
+    }),
+      syncFusionDBOXDepartments: builder.mutation({
+      query: (minDate) => ({
+        url: API_PATHS.SYNC_FUSION_DBOX_DEPARTMENTS,
+        method: "POST",
+        body: minDate,
+      }),
+    }),
     // more endpoints here
   }),
 });
@@ -63,5 +77,7 @@ export const {
   useGetDarwinBoxDesignationsQuery,
   useSyncFusionDBOXJobsMutation,
   useSyncFusionDBOXPositionsMutation,
-  useSyncFusionDBOXEmployeesMutation
+  useSyncFusionDBOXEmployeesMutation,
+    useSyncFusionDBOXGradesMutation,
+    useSyncFusionDBOXDepartmentsMutation
 } = apiSlice;

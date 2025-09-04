@@ -8,42 +8,33 @@ import {
   CircularProgress,
   Alert,
 } from "@mui/material";
+import { useSyncFusionDBOXDepartmentsMutation } from "../../api/apiSlice";
 
-// import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-// import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-// import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-// import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import { useSyncFusionDBOXEmployeesMutation } from "../../api/apiSlice";
-
-const EmployeesSyncPage = () => {
+const DepartmentSyncPage = () => {
   const [date, setDate] = useState("");
-  const [res, setRes] = useState("Employees synced successfully!");
+  const [res, setRes] = useState("Departments synced successfully!");
   const [resMsg, setResMsg] = useState([]);
-  const [syncFusionDBOXEmployees, { isLoading, isSuccess, error }] =
-    useSyncFusionDBOXEmployeesMutation();
+  const [syncFusionDBOXDepartments, { isLoading, isSuccess, error }] =
+    useSyncFusionDBOXDepartmentsMutation();
 
   const handleSubmit = async () => {
     if (!date) return alert("Please select a date");
 
     try {
-      const isoDate = new Date(date).toLocaleDateString().replaceAll("/", "-");
-      console.log();
-      const response = await syncFusionDBOXEmployees({
-        date: isoDate,
-      }).unwrap();
+      console.log(date);
+      const isoDate = new Date(date).toISOString();
 
+      const response = await syncFusionDBOXDepartments({ minDate: isoDate }).unwrap();
       if (response.success) {
         setRes(response.message || "Sync completed successfully");
         if (response.details) {
           setResMsg(response.details);
-        } else {
-          setResMsg([response.message]);
-          setResMsg([response.messages]);
+        }else{
+          setResMsg([response.message])
         }
 
         console.log("Sync successful:", response.message);
       } else {
-        setResMsg([response.error]);
         setRes(response.error || "An unknown error occurred");
       }
     } catch (err) {
@@ -56,28 +47,19 @@ const EmployeesSyncPage = () => {
   return (
     <Container maxWidth="sm" sx={{ mt: 5 }}>
       <Typography variant="h4" gutterBottom align="center">
-        Employee Sync from Darwinbox to Fusion
+        Department Sync from Fusion to Darwinbox
       </Typography>
 
       <Box display="flex" flexDirection="column" gap={3}>
         <TextField
           label="Select Date"
-          type="date"
+          type="datetime-local"
           InputLabelProps={{ shrink: true }}
           value={date}
           onChange={(e) => setDate(e.target.value)}
           fullWidth
-
         />
-        {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DemoContainer components={["DateTimePicker"]}>
-            <DateTimePicker
-              label="Basic date time picker"
-              value={date}
-              onChange={(newValue) => setDate(newValue)}
-            />
-          </DemoContainer>
-        </LocalizationProvider> */}
+
         <Button
           variant="contained"
           color="primary"
@@ -87,7 +69,7 @@ const EmployeesSyncPage = () => {
           {isLoading ? (
             <CircularProgress size={24} color="inherit" />
           ) : (
-            "Sync Employees"
+            "Sync Departments"
           )}
         </Button>
 
@@ -97,7 +79,7 @@ const EmployeesSyncPage = () => {
           })}
         {error && (
           <Alert severity="error">
-            Failed to sync Employees.{error?.data.errors?.[0]?.msg}
+            Failed to sync Departments.{error?.data.errors?.[0]?.msg}
           </Alert>
         )}
       </Box>
@@ -105,5 +87,4 @@ const EmployeesSyncPage = () => {
   );
 };
 
-export default EmployeesSyncPage;
-
+export default DepartmentSyncPage;

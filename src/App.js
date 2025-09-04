@@ -14,6 +14,9 @@ import DarwinDesignation from "./features/darwinbox/Designation";
 import CompareEmployees from "./features/comparison/Employees";
 import PositionSyncPage from "./features/comparison/Positions";
 import JobSyncPage from "./features/comparison/Jobs";
+import GradeSyncPage from "./features/comparison/Grades";
+import DocumentSyncPage from "./features/comparison/DocumentSync";
+import DepartmentSyncPage from "./features/comparison/Department";
 
 function App() {
   return (
@@ -27,11 +30,17 @@ function App() {
           <Route path="/darwinbox/employees" element={<DarwinEmployees />} />
           <Route path="/darwinbox/positions" element={<DarwinPositions />} />
           <Route path="/darwinbox/jobs" element={<DarwinJobs />} />
-          <Route path="/darwinbox/designatons" element={<DarwinDesignation />} />
+          <Route
+            path="/darwinbox/designatons"
+            element={<DarwinDesignation />}
+          />
 
           <Route path="/compare/employees" element={<CompareEmployees />} />
           <Route path="/compare/positions" element={<PositionSyncPage />} />
           <Route path="/compare/jobs" element={<JobSyncPage />} />
+            <Route path="/compare/departments" element={<DepartmentSyncPage />} /> 
+          <Route path="/compare/docSync" element={<DocumentSyncPage />} />
+          <Route path="/compare/grade" element={<GradeSyncPage />} />
         </Routes>
       </Layout>
     </Router>

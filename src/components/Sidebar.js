@@ -46,6 +46,17 @@ const menuStructure = [
       { label: "Employees", to: "/compare/employees", icon: <CompareArrows /> },
       { label: "Positions", to: "/compare/positions", icon: <CompareArrows /> },
       { label: "Jobs", to: "/compare/jobs", icon: <CompareArrows /> },
+      {
+        label: "Departments",
+        to: "/compare/departments",
+        icon: <CompareArrows />,
+      },
+      { label: "Grades", to: "/compare/grade", icon: <CompareArrows /> },
+      {
+        label: "Documnets Sync",
+        to: "/compare/docSync",
+        icon: <CompareArrows />,
+      },
     ],
   },
 ];

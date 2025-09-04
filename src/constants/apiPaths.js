@@ -10,6 +10,8 @@ const API_PATHS = {
   SYNC_FUSION_DBOX_JOBS: "darwinbox/syncJobs",
   SYNC_FUSION_DBOX_POSITIONS: "darwinbox/syncPosition",
   SYNC_DBOX_FUSION_EMPLOYEE: "fusion/darwinToFusionEmp",
+  SYNC_FUSION_DBOX_GRADES: "/darwinbox/syncGrade",
+  SYNC_FUSION_DBOX_DEPARTMENTS: "/darwinbox/syncDepartments",
   // Add more as needed
 };
 
